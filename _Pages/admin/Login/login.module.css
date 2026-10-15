@@ -1,0 +1,97 @@
+.pantalla {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background: var(--tinta);
+}
+
+.tarjeta {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 34px 32px;
+  background: var(--tinta2);
+  border: 1px solid var(--lineaOscura);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.emblema {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--lineaOro);
+}
+
+.emblema img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nombre {
+  font-family: var(--titulo);
+  font-size: 1.15rem;
+  color: #f2f0eb;
+}
+
+.titulo {
+  font-size: 1.7rem;
+  color: #f2f0eb;
+  margin-top: 8px;
+}
+
+.texto {
+  font-size: 0.9rem;
+  color: var(--acero);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.campo label {
+  font-size: 0.78rem;
+  color: var(--acero);
+}
+
+.campo input {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--tinta);
+  border: 1px solid var(--lineaOscura);
+  border-radius: 2px;
+  color: #eef0f2;
+  font-family: var(--datos);
+  font-size: 0.95rem;
+}
+
+.error {
+  font-size: 0.82rem;
+  color: #e0836a;
+}
+
+.pista {
+  font-size: 0.76rem;
+  color: var(--acero);
+}
+
+.volver {
+  font-size: 0.78rem;
+  color: var(--oro);
+}
+
+.volver:hover {
+  color: var(--oro2);
+}

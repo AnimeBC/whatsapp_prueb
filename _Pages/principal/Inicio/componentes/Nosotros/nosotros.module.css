@@ -1,0 +1,99 @@
+.titulo {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 14px 0 18px;
+}
+
+.pilares {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 40px;
+}
+
+.pilar {
+  padding: 28px 34px 0;
+  border-top: 1px solid var(--lineaClara);
+}
+
+.pilar:first-child {
+  padding-left: 0;
+}
+
+.pilar:last-child {
+  padding-right: 0;
+}
+
+.pilar:not(:last-child) {
+  border-right: 1px solid var(--lineaClara);
+}
+
+.pilar h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.pilar p {
+  color: var(--grafito);
+  font-size: 0.95rem;
+  max-width: 34ch;
+}
+
+.valoresBloque {
+  margin-top: 52px;
+}
+
+.valoresTitulo {
+  font-size: 1.4rem;
+  margin-bottom: 22px;
+}
+
+.valores {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.valor {
+  border-top: 2px solid var(--oro);
+  padding-top: 14px;
+}
+
+.valor dt {
+  font-family: var(--titulo);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.valor dd {
+  color: var(--grafito);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .pilares {
+    grid-template-columns: 1fr;
+  }
+
+  .pilar {
+    padding: 24px 0 0;
+    border-right: 0;
+  }
+
+  .pilar:not(:first-child) {
+    margin-top: 8px;
+  }
+
+  .valor {
+    padding-top: 12px;
+  }
+
+  .valores {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .valores {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,42 @@
+.pie {
+  background: #0c121b;
+  border-top: 1px solid var(--lineaOscura);
+}
+
+.contenido {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.marca {
+  font-family: var(--titulo);
+  font-size: 0.82rem;
+  color: #cbc6bb;
+}
+
+.derecha {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.meta {
+  font-size: 0.72rem;
+  color: var(--acero);
+}
+
+@media (max-width: 560px) {
+  .contenido {
+    align-items: flex-start;
+  }
+
+  .derecha {
+    align-items: flex-start;
+  }
+}

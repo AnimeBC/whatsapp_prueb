@@ -1,0 +1,110 @@
+.encabezado {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: var(--altoEncabezado);
+  background: var(--tinta);
+  border-bottom: 1px solid var(--lineaOscura);
+}
+
+.contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 100%;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.emblema {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--lineaOro);
+}
+
+.emblema img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.marcaTexto {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.nombre {
+  font-family: var(--titulo);
+  font-weight: 600;
+  font-size: 1.28rem;
+  color: #f2f0eb;
+}
+
+.sub {
+  margin-top: 4px;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--acero);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-left: auto;
+}
+
+.enlace {
+  position: relative;
+  padding: 6px 0;
+  font-size: 0.86rem;
+  color: #c2c8d1;
+}
+
+.enlace:hover {
+  color: var(--oro);
+}
+
+.enlace:active {
+  color: var(--oro2);
+}
+
+.activo {
+  color: var(--oro);
+}
+
+.activo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--oro);
+}
+
+.cta {
+  padding: 0.6rem 1.1rem;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 940px) {
+  .nav {
+    display: none;
+  }
+
+  .cta {
+    margin-left: auto;
+  }
+}

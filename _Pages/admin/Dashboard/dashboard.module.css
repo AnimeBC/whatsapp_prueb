@@ -1,0 +1,73 @@
+.encabezado {
+  margin-bottom: 24px;
+}
+
+.titulo {
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  color: #f2f0eb;
+}
+
+.sub {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--acero);
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+  gap: 14px;
+}
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px;
+  background: var(--tinta2);
+  border: 1px solid var(--lineaOscura);
+  border-top: 2px solid var(--oro);
+}
+
+.kpiValor {
+  font-family: var(--datos);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  color: #f2f0eb;
+}
+
+.kpiEtiqueta {
+  font-size: 0.72rem;
+  color: var(--acero);
+}
+
+.accesos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.acceso {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  background: var(--tinta2);
+  border: 1px solid var(--lineaOscura);
+}
+
+.acceso:hover {
+  border-color: var(--lineaOro);
+}
+
+.accesoTitulo {
+  font-family: var(--titulo);
+  font-size: 1.2rem;
+  color: #f2f0eb;
+}
+
+.accesoTexto {
+  font-size: 0.86rem;
+  color: var(--acero);
+}

@@ -1,0 +1,265 @@
+.ficha {
+  background: var(--blanco);
+  border: 1px solid var(--lineaClara);
+}
+
+.cabecera {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 22px 26px;
+  border-bottom: 1px solid var(--lineaClara);
+}
+
+.placa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: var(--tinta);
+  border: 1px solid var(--oro);
+  border-radius: 3px;
+  padding: 7px 14px;
+  min-width: 122px;
+}
+
+.placaEstado {
+  font-size: 0.56rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--acero);
+}
+
+.placaTexto {
+  font-family: var(--datos);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  color: var(--oro);
+}
+
+.identidad h3 {
+  font-size: 1.35rem;
+}
+
+.identidad p {
+  color: var(--grafito);
+  font-size: 0.82rem;
+  margin-top: 3px;
+}
+
+.estadoBloque {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.estado {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 5px 11px;
+  border: 1px solid;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.activo {
+  color: var(--verde);
+  border-color: rgba(62, 142, 98, 0.42);
+  background: rgba(62, 142, 98, 0.08);
+}
+
+.vencido {
+  color: var(--rojo);
+  border-color: rgba(180, 85, 58, 0.42);
+  background: rgba(180, 85, 58, 0.08);
+}
+
+.pendienteFila {
+  color: var(--grafito);
+  border-color: var(--lineaClara);
+  background: var(--piedra2);
+}
+
+.vigencia {
+  font-size: 0.74rem;
+  color: var(--grafito);
+}
+
+.lecturas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.lectura {
+  padding: 22px 26px;
+  border-right: 1px solid var(--lineaClara);
+}
+
+.medidor {
+  padding: 22px 26px;
+}
+
+.etiqueta {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--grafito);
+  margin-bottom: 9px;
+}
+
+.cifra {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--datos);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 600;
+  color: var(--tinta);
+  line-height: 1;
+}
+
+.cifra em {
+  font-style: normal;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--grafito);
+}
+
+.medidorCuerpo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.medidorTexto {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.78rem;
+  color: var(--grafito);
+  font-variant-numeric: tabular-nums;
+}
+
+.barra {
+  height: 6px;
+  background: var(--piedra);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.barra i {
+  display: block;
+  height: 100%;
+  background: var(--oro);
+}
+
+.servicioMeta {
+  font-size: 0.72rem;
+  color: var(--acero);
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  border-top: 1px solid var(--lineaClara);
+}
+
+.campos > div {
+  padding: 16px 26px;
+  border-right: 1px solid var(--lineaClara);
+}
+
+.campos dt {
+  font-size: 0.7rem;
+  color: var(--grafito);
+  margin-bottom: 6px;
+}
+
+.campos dd {
+  font-size: 0.9rem;
+  color: var(--tinta);
+}
+
+.pendiente {
+  color: #9a968a;
+}
+
+.enlace {
+  color: var(--tinta);
+  border-bottom: 1px solid var(--oro);
+  padding-bottom: 1px;
+}
+
+.enlace:hover {
+  color: var(--oro);
+}
+
+.registrar {
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid var(--lineaClara);
+  padding: 18px 26px;
+}
+
+.entrada {
+  flex: 1;
+  max-width: 260px;
+  padding: 11px 14px;
+  border: 1px solid var(--lineaClara);
+  background: var(--piedra2);
+  font-family: var(--datos);
+  font-size: 0.88rem;
+}
+
+.boton {
+  background: var(--tinta);
+  color: var(--oro);
+  border: 0;
+  padding: 0 22px;
+  font-family: var(--datos);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background: var(--tinta3);
+}
+
+@media (max-width: 820px) {
+  .cabecera {
+    grid-template-columns: auto 1fr;
+    row-gap: 14px;
+  }
+
+  .estadoBloque {
+    grid-column: 1 / -1;
+    align-items: flex-start;
+  }
+
+  .lecturas {
+    grid-template-columns: 1fr;
+  }
+
+  .lectura {
+    border-right: 0;
+    border-bottom: 1px solid var(--lineaClara);
+  }
+}
+
+@media (max-width: 560px) {
+  .registrar {
+    flex-wrap: wrap;
+  }
+
+  .entrada {
+    max-width: none;
+  }
+
+  .boton {
+    padding: 12px 22px;
+  }
+}

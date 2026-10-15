@@ -1,0 +1,47 @@
+.rejilla {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.titulo {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 14px 0 18px;
+}
+
+.parrafo {
+  margin-top: 16px;
+  color: #b8bfc9;
+  font-size: 1rem;
+  max-width: 62ch;
+}
+
+.marco {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--lineaOscura);
+  background: var(--tinta2);
+  overflow: hidden;
+}
+
+.imagen {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.pieFoto {
+  padding: 14px 18px;
+  border-top: 1px solid var(--lineaOscura);
+  font-size: 0.82rem;
+  color: var(--acero);
+}
+
+@media (max-width: 900px) {
+  .rejilla {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}

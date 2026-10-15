@@ -1,0 +1,106 @@
+{
+  "usuarios": [
+    {
+      "id": "admin",
+      "nombre": "Admin General",
+      "correo": "admin@gmail.com",
+      "contrasena": "123456",
+      "rol": "admin",
+      "vehiculos": []
+    },
+    {
+      "id": "prop-omar",
+      "nombre": "Omar Rosado",
+      "correo": "omar@drivemid.com",
+      "contrasena": "123456",
+      "rol": "propietario",
+      "vehiculos": ["YXY-669-G"]
+    },
+    {
+      "id": "prop-zulu",
+      "nombre": "Zulu Neria",
+      "correo": "zulu@drivemid.com",
+      "contrasena": "123456",
+      "rol": "propietario",
+      "vehiculos": ["YYY-210-G"]
+    },
+    {
+      "id": "prop-gran-santa-fe",
+      "nombre": "Socio Gran Santa Fe",
+      "correo": "dueno3@drivemid.com",
+      "contrasena": "123456",
+      "rol": "propietario",
+      "vehiculos": ["ZBC-793-H"]
+    },
+    {
+      "id": "prop-paseo",
+      "nombre": "Socio Paseo de Montejo",
+      "correo": "dueno4@drivemid.com",
+      "contrasena": "123456",
+      "rol": "propietario",
+      "vehiculos": ["ZAJ-700-H"]
+    }
+  ],
+  "vehiculos": [
+    {
+      "placa": "YXY-669-G",
+      "modelo": "AVEO 2022",
+      "poliza": "741326342",
+      "vigencia": "2027-07-23",
+      "conductor": "Omar Rosado",
+      "whatsapp": "+529901043246",
+      "familiar": "+529901043246",
+      "gps": "#",
+      "incidencias": "Ninguna",
+      "servicio": 120000,
+      "kmAnterior": 114000,
+      "kmTotal": 114650,
+      "pago": "pagado"
+    },
+    {
+      "placa": "YYY-210-G",
+      "modelo": "AVEO AUTO 2020",
+      "poliza": "741326979",
+      "vigencia": "2027-07-23",
+      "conductor": "Zulu Neria",
+      "whatsapp": "+527717957176",
+      "familiar": null,
+      "gps": "#",
+      "incidencias": "Ninguna",
+      "servicio": null,
+      "kmAnterior": null,
+      "kmTotal": null,
+      "pago": "pendiente"
+    },
+    {
+      "placa": "ZBC-793-H",
+      "modelo": "AVEO STD 2020",
+      "poliza": "741327084",
+      "vigencia": "2027-07-23",
+      "conductor": null,
+      "whatsapp": null,
+      "familiar": null,
+      "gps": "#",
+      "incidencias": "Ninguna",
+      "servicio": null,
+      "kmAnterior": null,
+      "kmTotal": null,
+      "pago": "pendiente"
+    },
+    {
+      "placa": "ZAJ-700-H",
+      "modelo": "AVEO STD 2020",
+      "poliza": "170216577800",
+      "vigencia": "2027-08-31",
+      "conductor": null,
+      "whatsapp": null,
+      "familiar": null,
+      "gps": "#",
+      "incidencias": "Ninguna",
+      "servicio": null,
+      "kmAnterior": null,
+      "kmTotal": null,
+      "pago": "pendiente"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+.portada {
+  background: var(--tinta);
+  color: #eef0f2;
+  padding: 56px 0 64px;
+}
+
+.titulo {
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  margin-top: 16px;
+  max-width: 15ch;
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 44px;
+  align-items: end;
+  margin-top: 26px;
+}
+
+.texto {
+  max-width: 60ch;
+}
+
+.lead {
+  font-size: 1.22rem;
+  color: #d6dbe2;
+  max-width: 52ch;
+}
+
+.sub {
+  margin-top: 14px;
+  color: #9aa4b0;
+  font-size: 1rem;
+  max-width: 60ch;
+}
+
+.acciones {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 4px;
+}
+
+.grafica {
+  margin-top: 38px;
+}
+
+@media (max-width: 900px) {
+  .fila {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .grafica {
+    margin-top: 30px;
+  }
+}
