@@ -15,7 +15,7 @@ const PASOS = [
   },
   {
     numero: "04",
-    texto: "Recibe tu primer rendimiento.",
+    texto: "Recibe tu primer rendimiento en 30 días.",
   },
 ];
 
