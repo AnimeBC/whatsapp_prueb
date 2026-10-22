@@ -14,8 +14,10 @@
 }
 
 .marca {
-  font-family: var(--titulo);
+  font-family: var(--datos);
   font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: #cbc6bb;
 }
 

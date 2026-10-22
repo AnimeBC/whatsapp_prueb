@@ -51,8 +51,10 @@
 }
 
 .marcaNombre {
-  font-family: var(--titulo);
+  font-family: var(--datos);
   font-size: 1.12rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: #f2f0eb;
 }
 
@@ -76,7 +78,7 @@
   border-radius: 50%;
   background: var(--oro);
   color: var(--tinta);
-  font-family: var(--titulo);
+  font-family: var(--datos);
   font-size: 1.1rem;
   font-weight: 600;
 }

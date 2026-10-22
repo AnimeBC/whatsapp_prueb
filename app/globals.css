@@ -18,8 +18,8 @@
   --verde: #3e8e62;
   --rojo: #b4553a;
 
-  --titulo: var(--fuente-titulo), Georgia, "Times New Roman", serif;
-  --datos: var(--fuente-datos), "Helvetica Neue", Arial, sans-serif;
+  --titulo: var(--fuente-titulo);
+  --datos: var(--fuente-datos);
 
   --ancho: 1180px;
   --altoEncabezado: 76px;
@@ -107,9 +107,12 @@ svg {
 }
 
 .kicker {
-  font-family: var(--titulo);
-  font-style: italic;
-  font-size: 1rem;
+  font-family: var(--datos);
+  font-style: normal;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--oro);
 }
 

@@ -58,7 +58,7 @@
 }
 
 .valor dt {
-  font-family: var(--titulo);
+  font-family: var(--datos);
   font-size: 1.15rem;
   font-weight: 600;
   margin-bottom: 4px;

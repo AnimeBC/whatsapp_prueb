@@ -46,8 +46,9 @@
 .numero {
   display: block;
   margin-bottom: 14px;
-  font-family: var(--titulo);
+  font-family: var(--datos);
   font-size: clamp(2rem, 3vw, 2.6rem);
+  font-weight: 600;
   color: var(--oro);
   line-height: 1;
 }

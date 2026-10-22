@@ -33,7 +33,7 @@
 
 .placaTexto {
   font-family: var(--datos);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1rem;
   letter-spacing: 0.08em;
   color: var(--oro);

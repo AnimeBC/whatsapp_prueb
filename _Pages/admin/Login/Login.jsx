@@ -19,10 +19,10 @@ export default function Login() {
         <div className={estilos.marca}>
           <span className={estilos.emblema}>
             <Image
-              src="/logo_autos.jpg"
+              src="/logo_emblema.png"
               alt=""
-              width={120}
-              height={120}
+              width={640}
+              height={640}
               priority
             />
           </span>
