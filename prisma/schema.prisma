@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id             String     @id @default(cuid())
+  nombre         String
+  correo         String     @unique
+  contrasenaHash String
+  rol            String     @default("propietario")
+  creadoEn       DateTime   @default(now())
+  vehiculos      Vehiculo[]
+}
+
+model Vehiculo {
+  placa             String        @id
+  modelo            String
+  poliza            String?
+  vigencia          DateTime?
+  conductor         String?
+  whatsapp          String?
+  familiar          String?
+  gps               String?
+  incidencias       String?
+  servicio          Int?
+  kmAnterior        Int?
+  kmTotal           Int?
+  semanaCirculacion Int           @default(0)
+  pago              String        @default("pendiente")
+  propietarioId     String?
+  propietario       Usuario?      @relation(fields: [propietarioId], references: [id], onDelete: SetNull)
+  historialKm       HistorialKm[]
+  pagos             Pago[]
+  creadoEn          DateTime      @default(now())
+  actualizadoEn     DateTime      @updatedAt
+
+  @@index([propietarioId])
+}
+
+model HistorialKm {
+  id         String   @id @default(cuid())
+  vehiculoId String
+  vehiculo   Vehiculo @relation(fields: [vehiculoId], references: [placa], onDelete: Cascade)
+  semana     Int?
+  km         Int
+  fecha      DateTime @default(now())
+
+  @@index([vehiculoId, fecha])
+}
+
+model Pago {
+  id         String   @id @default(cuid())
+  vehiculoId String
+  vehiculo   Vehiculo @relation(fields: [vehiculoId], references: [placa], onDelete: Cascade)
+  periodo    String
+  monto      Int      @default(0)
+  estatus    String   @default("pendiente")
+  fecha      DateTime @default(now())
+
+  @@index([vehiculoId, fecha])
+}

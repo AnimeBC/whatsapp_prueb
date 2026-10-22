@@ -2,29 +2,29 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { leerDatos, guardarDatos } from "@/app/api/almacen";
-
-const OPCIONES_COOKIE = {
-  httpOnly: true,
-  sameSite: "lax",
-  path: "/",
-  maxAge: 60 * 60 * 8,
-};
+import bcrypt from "bcryptjs";
+import { prisma } from "@/app/api/prisma";
+import { crearToken, OPCIONES_COOKIE } from "@/app/api/sesionToken";
 
 export async function iniciarSesionSocio(estadoPrevio, formData) {
-  const correo = String(formData.get("correo") || "").trim();
+  const correo = String(formData.get("correo") || "")
+    .trim()
+    .toLowerCase();
   const contrasena = String(formData.get("contrasena") || "");
 
   if (!correo || !contrasena) {
     return { error: "Ingresa tu correo y contraseña." };
   }
 
-  const datos = await leerDatos();
-  const usuario = datos.usuarios.find(
-    (u) => u.correo === correo && u.contrasena === contrasena
-  );
+  const usuario = await prisma.usuario.findUnique({ where: { correo } });
 
   if (!usuario) {
+    return { error: "Correo o contraseña incorrectos." };
+  }
+
+  const valida = await bcrypt.compare(contrasena, usuario.contrasenaHash);
+
+  if (!valida) {
     return { error: "Correo o contraseña incorrectos." };
   }
 
@@ -33,7 +33,7 @@ export async function iniciarSesionSocio(estadoPrevio, formData) {
   }
 
   const almacen = await cookies();
-  almacen.set("sesion", usuario.id, OPCIONES_COOKIE);
+  almacen.set("sesion", await crearToken(usuario), OPCIONES_COOKIE);
 
   redirect("/panel/dashboard");
 }
@@ -53,25 +53,25 @@ export async function registrarSocio(estadoPrevio, formData) {
     return { error: "La contraseña debe tener al menos 6 caracteres." };
   }
 
-  const datos = await leerDatos();
-  if (datos.usuarios.some((u) => u.correo.toLowerCase() === correo)) {
+  const existente = await prisma.usuario.findUnique({ where: { correo } });
+
+  if (existente) {
     return { error: "Ya existe una cuenta con ese correo." };
   }
 
-  const nuevo = {
-    id: `socio-${Date.now().toString(36)}`,
-    nombre,
-    correo,
-    contrasena,
-    rol: "propietario",
-    vehiculos: [],
-  };
+  const contrasenaHash = await bcrypt.hash(contrasena, 10);
 
-  datos.usuarios.push(nuevo);
-  await guardarDatos(datos);
+  const usuario = await prisma.usuario.create({
+    data: {
+      nombre,
+      correo,
+      contrasenaHash,
+      rol: "propietario",
+    },
+  });
 
   const almacen = await cookies();
-  almacen.set("sesion", nuevo.id, OPCIONES_COOKIE);
+  almacen.set("sesion", await crearToken(usuario), OPCIONES_COOKIE);
 
   redirect("/panel/dashboard");
 }

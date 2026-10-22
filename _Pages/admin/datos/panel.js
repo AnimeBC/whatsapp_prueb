@@ -1,27 +1,33 @@
-import { vehiculosDe } from "@/app/api/almacen";
+export function vehiculosParaPanel(usuario, vehiculos) {
+  if (usuario.rol === "admin") {
+    return { vehiculos, modoPrueba: false };
+  }
 
-export function vehiculosParaPanel(usuario, datos) {
-  const propios = vehiculosDe(usuario, datos);
+  const propios = vehiculos.filter(
+    (vehiculo) => vehiculo.propietarioId === usuario.id
+  );
 
-  if (usuario.rol !== "propietario" || propios.length > 0) {
+  if (propios.length > 0) {
     return { vehiculos: propios, modoPrueba: false };
   }
 
   return {
-    vehiculos: datos.vehiculos,
-    modoPrueba: datos.vehiculos.length > 0,
+    vehiculos,
+    modoPrueba: vehiculos.length > 0,
   };
 }
 
-export function flotaParaPanel(usuario, datos) {
+export function flotaParaPanel(usuario, vehiculos) {
   if (usuario.rol === "admin") {
-    return { propios: datos.vehiculos, otros: [] };
+    return { propios: vehiculos, otros: [] };
   }
 
-  const propios = vehiculosDe(usuario, datos);
-  const otros = datos.vehiculos.filter(
-    (vehiculo) => !usuario.vehiculos.includes(vehiculo.placa)
-  );
-
-  return { propios, otros };
+  return {
+    propios: vehiculos.filter(
+      (vehiculo) => vehiculo.propietarioId === usuario.id
+    ),
+    otros: vehiculos.filter(
+      (vehiculo) => vehiculo.propietarioId !== usuario.id
+    ),
+  };
 }

@@ -1,23 +1,99 @@
-import Link from "next/link";
-import { leerDatos } from "@/app/api/almacen";
-import { nf } from "@/_Pages/principal/datos/formato";
 import BotonCuenta from "@/_Pages/principal/componentes/BotonCuenta";
 import estilos from "./flota.module.css";
 
-async function obtenerFlotaPublica() {
-  "use cache";
-  const datos = await leerDatos();
-  return datos.vehiculos.map((vehiculo) => ({
-    placa: vehiculo.placa,
-    modelo: vehiculo.modelo,
-    semanaCirculacion: vehiculo.semanaCirculacion,
-    servicio: vehiculo.servicio,
-  }));
-}
+const ICONOS = {
+  km: (
+    <svg
+      viewBox="0 0 24 24"
+      width="22"
+      height="22"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M4 18a8 8 0 1 1 16 0" />
+      <path d="M12 14l4-4" />
+      <circle cx="12" cy="14" r="1.2" fill="currentColor" stroke="none" />
+    </svg>
+  ),
+  seguro: (
+    <svg
+      viewBox="0 0 24 24"
+      width="22"
+      height="22"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" />
+      <path d="M9 12l2 2 4-4" />
+    </svg>
+  ),
+  conductor: (
+    <svg
+      viewBox="0 0 24 24"
+      width="22"
+      height="22"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="8" r="3.2" />
+      <path d="M5 20c.8-3.4 3.6-5.4 7-5.4s6.2 2 7 5.4" />
+    </svg>
+  ),
+  pagos: (
+    <svg
+      viewBox="0 0 24 24"
+      width="22"
+      height="22"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="3" y="6" width="18" height="12" rx="2" />
+      <path d="M3 10h18" />
+      <path d="M7 15h4" />
+    </svg>
+  ),
+};
 
-export default async function Flota() {
-  const vehiculos = await obtenerFlotaPublica();
+const PUNTOS = [
+  {
+    icono: "km",
+    titulo: "Kilometraje",
+    texto: "Registro semanal y cálculo automático del recorrido de cada unidad.",
+  },
+  {
+    icono: "seguro",
+    titulo: "Seguro",
+    texto: "Vigencia y estatus de la póliza de cada vehículo.",
+  },
+  {
+    icono: "conductor",
+    titulo: "Conductor",
+    texto: "Datos y contacto directo de quien opera la unidad.",
+  },
+  {
+    icono: "pagos",
+    titulo: "Pagos",
+    texto: "Control de pagos y rendimientos por periodo.",
+  },
+];
 
+export default function Flota() {
   return (
     <section className="seccion claro" id="flota">
       <div className="contenedor">
@@ -30,47 +106,21 @@ export default async function Flota() {
           </p>
         </div>
 
-        <div className={estilos.lista}>
-          {vehiculos.map((vehiculo) => (
-            <Link
-              className={estilos.unidad}
-              href={`/panel/flota#${vehiculo.placa}`}
-              key={vehiculo.placa}
-            >
-              <div className={estilos.cabeceraUnidad}>
-                <span className={estilos.placa}>
-                  <span className={estilos.placaEstado}>Yucatán</span>
-                  <span className={estilos.placaTexto}>{vehiculo.placa}</span>
-                </span>
-                <span className={estilos.operacion}>En operación</span>
-              </div>
-
-              <h3 className={estilos.modelo}>{vehiculo.modelo}</h3>
-
-              <dl className={estilos.datos}>
-                <div>
-                  <dt>Semana en circulación</dt>
-                  <dd>{vehiculo.semanaCirculacion ?? "—"}</dd>
-                </div>
-                <div>
-                  <dt>Próximo servicio</dt>
-                  <dd>
-                    {vehiculo.servicio
-                      ? `${nf.format(vehiculo.servicio)} km`
-                      : "Pendiente"}
-                  </dd>
-                </div>
-              </dl>
-
-              <span className={estilos.verDetalle}>Ver detalle</span>
-            </Link>
+        <ol className={estilos.puntos}>
+          {PUNTOS.map((punto) => (
+            <li className={estilos.punto} key={punto.titulo}>
+              <span className={estilos.icono} aria-hidden="true">
+                {ICONOS[punto.icono]}
+              </span>
+              <h3 className={estilos.puntoTitulo}>{punto.titulo}</h3>
+              <p className={estilos.puntoTexto}>{punto.texto}</p>
+            </li>
           ))}
-        </div>
+        </ol>
 
         <div className={estilos.pie}>
           <p className={estilos.nota}>
-            El kilometraje, el conductor, el seguro y los pagos de cada unidad se
-            consultan en el panel privado.
+            El detalle de cada unidad se consulta en el panel privado.
           </p>
           <BotonCuenta />
         </div>

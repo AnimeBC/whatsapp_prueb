@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Drive Mid / Movility Fleet
 
-## Getting Started
+Sitio público para captar socios y panel privado para consultar la flota y la inversión.
 
-First, run the development server:
+## Requisitos
+
+- Node.js 20.9 o superior
+- npm
+
+## Puesta en marcha
+
+1. Instalar dependencias:
+
+```bash
+npm install
+```
+
+2. Configurar las variables de entorno. Copia `.env.example` a `.env` y ajusta los valores:
+
+```bash
+DATABASE_URL="file:./dev.db"
+JWT_SECRET="una-cadena-larga-y-aleatoria"
+```
+
+3. Crear la base de datos y las tablas:
+
+```bash
+npx prisma migrate dev --name init
+```
+
+4. Cargar los datos iniciales desde `data/datos.json`:
+
+```bash
+npm run db:seed
+```
+
+5. Levantar el sitio:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Accesos de prueba
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- Administrador: `admin@gmail.com` / `123456` en `/admin/login`
+- Socios: `omar@drivemid.com`, `zulu@drivemid.com`, `dueno3@drivemid.com`, `dueno4@drivemid.com` / `123456` en `/acceso`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Base de datos
 
-## Learn More
+El proyecto usa Prisma. En desarrollo trabaja con SQLite (`prisma/dev.db`); las contraseñas se guardan con hash y la sesión se firma con un JWT en cookie httpOnly.
 
-To learn more about Next.js, take a look at the following resources:
+Para pasar a PostgreSQL:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. En `prisma/schema.prisma`, cambia el provider:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+```
 
-## Deploy on Vercel
+2. Apunta `DATABASE_URL` a tu servidor PostgreSQL (por ejemplo Neon o Supabase).
+3. Si ya generaste migraciones con SQLite, borra la carpeta `prisma/migrations` para que no se mezclen los motores.
+4. Genera la migración de PostgreSQL y carga los datos:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npx prisma migrate dev --name init
+npm run db:seed
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Scripts
+
+- `npm run dev`: inicia el entorno de desarrollo.
+- `npm run build`: compila para producción.
+- `npm run db:generate`: genera el cliente de Prisma.
+- `npm run db:migrate`: crea o actualiza la base en desarrollo.
+- `npm run db:seed`: carga los datos iniciales.
+- `npm run db:studio`: abre Prisma Studio para ver y editar la base.
