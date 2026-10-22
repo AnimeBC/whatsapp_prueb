@@ -1,0 +1,203 @@
+.pantalla {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background:
+    radial-gradient(120% 150% at 85% -10%, rgba(193, 164, 90, 0.14), transparent 55%),
+    var(--tinta);
+}
+
+.marco {
+  width: 100%;
+  max-width: 940px;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  overflow: hidden;
+  border: 1px solid var(--lineaOscura);
+  background: var(--tinta2);
+}
+
+.lateral {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 36px 34px;
+  background: linear-gradient(160deg, #232b37 0%, #121925 70%);
+  border-right: 1px solid var(--lineaOscura);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.emblema {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--lineaOro);
+}
+
+.emblema img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.marcaNombre {
+  font-family: var(--titulo);
+  font-size: 1.2rem;
+  color: #f2f0eb;
+}
+
+.mensaje {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kicker {
+  color: var(--oro);
+  font-family: var(--titulo);
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.titulo {
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  color: #f2f0eb;
+}
+
+.texto {
+  color: #9aa4b0;
+  font-size: 0.95rem;
+  max-width: 34ch;
+}
+
+.formulario {
+  display: flex;
+  align-items: center;
+  padding: 36px 34px;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.pestanas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  background: var(--tinta);
+  border: 1px solid var(--lineaOscura);
+  border-radius: 999px;
+}
+
+.pestana {
+  border: 0;
+  background: transparent;
+  color: var(--acero);
+  font-family: var(--datos);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 9px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.pestana:hover {
+  color: #f2f0eb;
+}
+
+.pestanaActiva {
+  background: var(--oro);
+  color: var(--tinta);
+}
+
+.formCampos {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 380px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.campo label {
+  font-size: 0.78rem;
+  color: var(--acero);
+}
+
+.campo input {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--tinta);
+  border: 1px solid var(--lineaOscura);
+  border-radius: 2px;
+  color: #eef0f2;
+  font-family: var(--datos);
+  font-size: 0.95rem;
+}
+
+.error {
+  font-size: 0.82rem;
+  color: #e0836a;
+}
+
+.pista {
+  font-size: 0.76rem;
+  color: var(--acero);
+}
+
+.volver {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8rem;
+  color: var(--acero);
+}
+
+.volver::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-left: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.volver:hover {
+  color: var(--oro);
+}
+
+@media (max-width: 820px) {
+  .marco {
+    grid-template-columns: 1fr;
+  }
+
+  .lateral {
+    gap: 24px;
+    padding: 28px;
+    border-right: 0;
+    border-bottom: 1px solid var(--lineaOscura);
+  }
+
+  .formulario {
+    padding: 28px;
+  }
+}

@@ -21,6 +21,10 @@ export async function iniciarSesion(estadoPrevio, formData) {
     return { error: "Correo o contraseña incorrectos." };
   }
 
+  if (usuario.rol !== "admin") {
+    return { error: "Este acceso es solo para administradores." };
+  }
+
   const almacen = await cookies();
   almacen.set("sesion", usuario.id, {
     httpOnly: true,
@@ -29,11 +33,11 @@ export async function iniciarSesion(estadoPrevio, formData) {
     maxAge: 60 * 60 * 8,
   });
 
-  redirect("/admin");
+  redirect("/panel/dashboard");
 }
 
 export async function cerrarSesion() {
   const almacen = await cookies();
   almacen.delete("sesion");
-  redirect("/admin/login");
+  redirect("/");
 }

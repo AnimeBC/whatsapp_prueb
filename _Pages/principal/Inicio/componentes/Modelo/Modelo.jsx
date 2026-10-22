@@ -5,9 +5,11 @@ export default function Modelo() {
   return (
     <section className="seccion oscuro" id="modelo">
       <div className={`contenedor ${estilos.rejilla}`}>
-        <div>
+        <div className={estilos.texto}>
           <p className="kicker">Modelo de negocio</p>
-          <h2 className={estilos.titulo}>Capital que se mueve en la ciudad</h2>
+          <h2 className={estilos.titulo}>
+            Tu capital, en movimiento en la ciudad más segura
+          </h2>
           <p className="lead">
             Captamos capital a través de una red estratégica de referencias e
             invertimos directamente en el sector de movilidad en la ciudad de
@@ -24,15 +26,17 @@ export default function Modelo() {
           </p>
         </div>
 
-        <figure className={estilos.marco}>
-          <Image
-            className={estilos.imagen}
-            src="/logo_autos.jpg"
-            alt="Drive Mid, movilidad y flota en Mérida"
-            width={1408}
-            height={768}
-            sizes="(max-width: 900px) 90vw, 45vw"
-          />
+        <figure className={estilos.emblemaBloque}>
+          <span className={estilos.emblema}>
+            <Image
+              className={estilos.imagen}
+              src="/logo_emblema.png"
+              alt="Drive Mid"
+              width={640}
+              height={640}
+              sizes="(max-width: 900px) 60vw, 340px"
+            />
+          </span>
           <figcaption className={estilos.pieFoto}>
             Drive Mid, operación y flota en Mérida, Yucatán
           </figcaption>

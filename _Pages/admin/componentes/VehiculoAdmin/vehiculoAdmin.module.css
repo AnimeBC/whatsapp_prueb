@@ -50,6 +50,19 @@
   color: var(--acero);
 }
 
+.prueba {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 8px;
+  border: 1px solid var(--lineaOro);
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--oro);
+}
+
 .estado {
   font-size: 0.72rem;
   font-weight: 600;
@@ -162,12 +175,17 @@ button.pago {
   cursor: pointer;
 }
 
+.controles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-width: 260px;
+}
+
 .registrar {
   display: flex;
   gap: 10px;
-  flex: 1;
-  justify-content: flex-end;
-  min-width: 260px;
 }
 
 .entrada {
@@ -222,6 +240,10 @@ button.pago {
 
   .registrar {
     justify-content: flex-start;
+    min-width: 100%;
+  }
+
+  .controles {
     min-width: 100%;
   }
 

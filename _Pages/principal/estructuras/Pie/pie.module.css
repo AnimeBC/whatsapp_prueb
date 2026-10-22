@@ -19,13 +19,6 @@
   color: #cbc6bb;
 }
 
-.derecha {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-}
-
 .meta {
   font-size: 0.72rem;
   color: var(--acero);
@@ -33,10 +26,6 @@
 
 @media (max-width: 560px) {
   .contenido {
-    align-items: flex-start;
-  }
-
-  .derecha {
     align-items: flex-start;
   }
 }

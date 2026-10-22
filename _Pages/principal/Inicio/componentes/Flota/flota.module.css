@@ -1,57 +1,151 @@
 .cabecera {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 40px;
-  flex-wrap: wrap;
+  max-width: 720px;
 }
 
 .titulo {
   font-size: clamp(2rem, 4vw, 3rem);
-  margin: 14px 0 18px;
+  margin: 14px 0 16px;
 }
 
-.semana {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 5px;
-  border-left: 2px solid var(--oro);
-  padding-left: 18px;
-}
-
-.semanaNum {
-  font-family: var(--titulo);
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 600;
-  color: var(--tinta);
-  line-height: 1;
-}
-
-.semanaRango {
-  font-size: 0.82rem;
+.lead {
   color: var(--grafito);
+  font-size: 1.05rem;
+  max-width: 64ch;
 }
 
 .lista {
   display: grid;
-  gap: 18px;
-  margin-top: 34px;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.unidad {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: var(--blanco);
+  border: 1px solid var(--lineaClara);
+  border-top: 3px solid var(--oro);
+  color: inherit;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+
+.unidad:hover {
+  border-top-color: var(--oro2);
+  transform: translateY(-2px);
+}
+
+.cabeceraUnidad {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.placa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 108px;
+  padding: 6px 12px;
+  background: var(--tinta);
+  border: 1px solid var(--oro);
+  border-radius: 3px;
+  flex: 0 0 auto;
+}
+
+.placaEstado {
+  font-size: 0.54rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--acero);
+}
+
+.placaTexto {
+  font-family: var(--datos);
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  color: var(--oro);
+}
+
+.operacion {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--verde);
+  border: 1px solid rgba(62, 142, 98, 0.4);
+  background: rgba(62, 142, 98, 0.08);
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.modelo {
+  font-size: 1.2rem;
+}
+
+.datos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--lineaClara);
+}
+
+.datos dt {
+  font-size: 0.72rem;
+  color: var(--grafito);
+  margin-bottom: 4px;
+}
+
+.datos dd {
+  font-family: var(--datos);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--tinta);
+}
+
+.verDetalle {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--datos);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--oro);
+}
+
+.verDetalle::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-top: 1.5px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 24px;
 }
 
 .nota {
-  margin-top: 18px;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: var(--grafito);
-  max-width: 72ch;
+  max-width: 60ch;
 }
 
-@media (max-width: 820px) {
-  .semana {
-    align-items: flex-start;
-    border-left: 0;
-    border-top: 2px solid var(--oro);
-    padding-left: 0;
-    padding-top: 14px;
+@media (max-width: 560px) {
+  .unidad {
+    padding: 16px;
   }
 }

@@ -1,185 +1,76 @@
+import Image from "next/image";
 import estilos from "./proyeccion.module.css";
 
-const CAPITAL = 100000;
-const MESES = 12;
-
 const ESCENARIOS = [
-  { nombre: "Óptimo", anual: 0.42, color: "#c1a45a", grosor: 2.6 },
-  { nombre: "Base", anual: 0.3, color: "#9aa4b0", grosor: 1.7 },
-  { nombre: "Catastrófico", anual: 0.18, color: "#67727f", grosor: 1.7 },
+  {
+    titulo: "Escenarios optimistas",
+    detalle: "sin paros",
+    avance: 90,
+    roi: "38% - 42% ROI",
+  },
+  {
+    titulo: "Escenarios base",
+    detalle: "85% ocupación",
+    avance: 65,
+    roi: "24% - 28% ROI",
+  },
+  {
+    titulo: "Escenario conservador",
+    detalle: "estrés",
+    avance: 40,
+    roi: "14% - 18% ROI",
+  },
 ];
 
-const ANCHO = 680;
-const ALTO = 440;
-const IZQ = 68;
-const DER = 122;
-const ARRIBA = 44;
-const ABAJO = 58;
-const X0 = IZQ;
-const X1 = ANCHO - DER;
-const Y0 = ALTO - ABAJO;
-const Y1 = ARRIBA;
-const VMIN = 100000;
-const VMAX = 144000;
-
-const ejeX = (t) => X0 + (t / MESES) * (X1 - X0);
-const ejeY = (v) => Y0 - ((v - VMIN) / (VMAX - VMIN)) * (Y0 - Y1);
-
-function serie(anual) {
-  const mensual = Math.pow(1 + anual, 1 / MESES) - 1;
-  return Array.from({ length: MESES + 1 }, (_, t) => ({
-    t,
-    v: Math.round(CAPITAL * Math.pow(1 + mensual, t)),
-  }));
-}
-
-const lineasY = [100000, 110000, 120000, 130000, 140000];
-const pasosX = [0, 3, 6, 9, 12];
-
-const mxn = new Intl.NumberFormat("es-MX", {
-  style: "currency",
-  currency: "MXN",
-  maximumFractionDigits: 0,
-});
-
-const datos = ESCENARIOS.map((e) => {
-  const puntos = serie(e.anual);
-  return {
-    ...e,
-    puntos,
-    final: puntos[puntos.length - 1].v,
-    polyline: puntos.map((p) => `${ejeX(p.t)},${ejeY(p.v)}`).join(" "),
-  };
-});
-
 export default function Proyeccion() {
-  const areaOptimo = `${X0},${Y0} ${datos[0].polyline} ${X1},${Y0}`;
-
   return (
-    <div className={estilos.panel}>
-      <div className={estilos.cabecera}>
-        <h3 className={estilos.titulo}>
-          Proyección de {mxn.format(CAPITAL)}
-        </h3>
-        <p className={estilos.nota}>Rendimiento compuesto a 12 meses</p>
+    <section className={estilos.slide} aria-label="Escenarios de rendimiento">
+      <div className={estilos.banda}>
+        <span className={estilos.emblema}>
+          <Image src="/logo_autos.jpg" alt="" width={80} height={80} />
+        </span>
+        <span className={estilos.bandaTexto}>Drive Mid</span>
       </div>
 
-      <svg
-        className={estilos.grafica}
-        viewBox={`0 0 ${ANCHO} ${ALTO}`}
-        role="img"
-        aria-label="Proyección del capital a 12 meses en tres escenarios: óptimo 42 por ciento, base 30 por ciento y catastrófico 18 por ciento."
-      >
-        {lineasY.map((v) => (
-          <g key={v}>
-            <line
-              x1={X0}
-              x2={X1}
-              y1={ejeY(v)}
-              y2={ejeY(v)}
-              className={estilos.grid}
-            />
-            <text
-              x={X0 - 12}
-              y={ejeY(v) + 4}
-              className={estilos.etiquetaY}
-              textAnchor="end"
-            >
-              {v / 1000}k
-            </text>
-          </g>
-        ))}
+      <div className={estilos.contenido}>
+        <header className={estilos.cabecera}>
+          <h2 className={estilos.titulo}>Escenarios de rendimiento</h2>
+        </header>
 
-        <line x1={X0} x2={X1} y1={Y0} y2={Y0} className={estilos.base} />
+        <div className={estilos.escenarios}>
+          {ESCENARIOS.map((escenario) => (
+            <div className={estilos.escenario} key={escenario.titulo}>
+              <div className={estilos.etiquetaFila}>
+                <span className={estilos.etiqueta}>
+                  {escenario.titulo}
+                  <em>({escenario.detalle})</em>
+                </span>
+                <span className={estilos.roi}>{escenario.roi}</span>
+              </div>
 
-        {pasosX.map((t) => (
-          <text
-            key={t}
-            x={ejeX(t)}
-            y={Y0 + 26}
-            className={estilos.etiquetaX}
-            textAnchor="middle"
-          >
-            {t}
-          </text>
-        ))}
-        <text
-          x={(X0 + X1) / 2}
-          y={ALTO - 12}
-          className={estilos.ejeTitulo}
-          textAnchor="middle"
-        >
-          meses
-        </text>
-
-        <polygon points={areaOptimo} className={estilos.area} />
-
-        {datos.map((d) => (
-          <polyline
-            key={d.nombre}
-            points={d.polyline}
-            fill="none"
-            stroke={d.color}
-            strokeWidth={d.grosor}
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          />
-        ))}
-
-        {datos.map((d) => {
-          const ultimo = d.puntos[d.puntos.length - 1];
-          return (
-            <g key={d.nombre}>
-              <circle
-                cx={ejeX(ultimo.t)}
-                cy={ejeY(ultimo.v)}
-                r="3.6"
-                fill={d.color}
-              />
-              <text
-                x={X1 + 14}
-                y={ejeY(ultimo.v) - 1}
-                className={estilos.etiquetaLinea}
-                fill={d.color}
+              <div
+                className={estilos.pista}
+                role="progressbar"
+                aria-valuenow={escenario.avance}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label={`${escenario.titulo}, ${escenario.roi}`}
               >
-                +{Math.round(d.anual * 100)}%
-              </text>
-              <text
-                x={X1 + 14}
-                y={ejeY(ultimo.v) + 15}
-                className={estilos.nombreLinea}
-              >
-                {d.nombre}
-              </text>
-            </g>
-          );
-        })}
-      </svg>
-
-      <table className={estilos.tabla}>
-        <thead>
-          <tr>
-            <th>Escenario</th>
-            <th>Anual</th>
-            <th>A 12 meses</th>
-          </tr>
-        </thead>
-        <tbody>
-          {datos.map((d) => (
-            <tr key={d.nombre}>
-              <td>
-                <span
-                  className={estilos.muestra}
-                  style={{ background: d.color }}
+                <div
+                  className={estilos.barra}
+                  style={{ width: `${escenario.avance}%` }}
                 />
-                {d.nombre}
-              </td>
-              <td>+{Math.round(d.anual * 100)}%</td>
-              <td>{mxn.format(d.final)}</td>
-            </tr>
+              </div>
+            </div>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </div>
+
+        <footer className={estilos.pie}>
+          <span>
+            Nota: rendimiento anual CETES BBVA 11.0% a 12.1%
+          </span>
+        </footer>
+      </div>
+    </section>
   );
 }

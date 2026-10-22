@@ -1,0 +1,83 @@
+.proceso {
+  background: #0c121b;
+  border-top: 1px solid var(--lineaOro);
+  color: #eef0f2;
+}
+
+.cabecera {
+  max-width: 680px;
+}
+
+.titulo {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 14px 0 16px;
+  color: #f2f0eb;
+}
+
+.lead {
+  max-width: 60ch;
+  font-size: 1.05rem;
+  color: #b8bfc9;
+}
+
+.pasos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 44px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--lineaOscura);
+}
+
+.paso {
+  padding: 26px 28px 0;
+  border-right: 1px solid var(--lineaOscura);
+}
+
+.paso:first-child {
+  padding-left: 0;
+}
+
+.paso:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.numero {
+  display: block;
+  margin-bottom: 14px;
+  font-family: var(--titulo);
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  color: var(--oro);
+  line-height: 1;
+}
+
+.texto {
+  max-width: 24ch;
+  color: #d6dbe2;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+  .pasos {
+    grid-template-columns: 1fr;
+    margin-top: 34px;
+  }
+
+  .paso {
+    padding: 20px 0;
+    border-right: 0;
+  }
+
+  .paso:not(:last-child) {
+    border-bottom: 1px solid var(--lineaOscura);
+  }
+
+  .paso:first-child {
+    padding-top: 22px;
+  }
+
+  .texto {
+    max-width: 48ch;
+  }
+}

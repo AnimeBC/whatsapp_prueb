@@ -28,11 +28,19 @@ export default function VehiculoAdmin({
   vehiculo,
   admin,
   hoy,
+  semana,
+  prueba = false,
   onActualizar,
 }) {
   const [km, setKm] = useState("");
+  const [semanaInput, setSemanaInput] = useState("");
+  const [gpsInput, setGpsInput] = useState(
+    vehiculo.gps && vehiculo.gps !== "#" ? vehiculo.gps : ""
+  );
   const [error, setError] = useState("");
   const [guardando, setGuardando] = useState(false);
+  const [guardandoSemana, setGuardandoSemana] = useState(false);
+  const [guardandoGps, setGuardandoGps] = useState(false);
 
   const activo =
     hoy == null || new Date(vehiculo.vigencia).getTime() >= hoy;
@@ -40,6 +48,7 @@ export default function VehiculoAdmin({
     vehiculo.kmTotal != null && vehiculo.kmAnterior != null
       ? vehiculo.kmTotal - vehiculo.kmAnterior
       : null;
+  const puedeEditar = admin || prueba;
 
   async function registrarKm() {
     setError("");
@@ -47,6 +56,15 @@ export default function VehiculoAdmin({
     const actual = vehiculo.kmTotal ?? 0;
     if (isNaN(valor) || valor < actual) {
       setError(`Debe ser mayor o igual a ${nf.format(actual)} km.`);
+      return;
+    }
+    if (prueba && !admin) {
+      onActualizar({
+        ...vehiculo,
+        kmAnterior: vehiculo.kmTotal,
+        kmTotal: valor,
+      });
+      setKm("");
       return;
     }
     setGuardando(true);
@@ -68,6 +86,10 @@ export default function VehiculoAdmin({
 
   async function alternarPago() {
     const nuevo = vehiculo.pago === "pagado" ? "pendiente" : "pagado";
+    if (prueba && !admin) {
+      onActualizar({ ...vehiculo, pago: nuevo });
+      return;
+    }
     const respuesta = await fetch("/api/vehiculos", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -79,8 +101,70 @@ export default function VehiculoAdmin({
     }
   }
 
+  async function guardarSemana() {
+    setError("");
+    const valor = parseInt(semanaInput, 10);
+    if (isNaN(valor) || valor < 0) {
+      setError("La semana en circulación debe ser un número entero.");
+      return;
+    }
+    if (prueba && !admin) {
+      onActualizar({ ...vehiculo, semanaCirculacion: valor });
+      setSemanaInput("");
+      return;
+    }
+    setGuardandoSemana(true);
+    const respuesta = await fetch("/api/vehiculos", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        placa: vehiculo.placa,
+        semanaCirculacion: valor,
+      }),
+    });
+    setGuardandoSemana(false);
+    if (!respuesta.ok) {
+      const data = await respuesta.json().catch(() => ({}));
+      setError(data.error || "No se pudo guardar la semana.");
+      return;
+    }
+    const { vehiculo: actualizado } = await respuesta.json();
+    onActualizar(actualizado);
+    setSemanaInput("");
+  }
+
+  async function guardarGps() {
+    setError("");
+    const valor = gpsInput.trim();
+
+    if (valor && !/^https?:\/\//i.test(valor)) {
+      setError("El link del GPS debe iniciar con http:// o https://.");
+      return;
+    }
+
+    if (prueba && !admin) {
+      onActualizar({ ...vehiculo, gps: valor || "#" });
+      return;
+    }
+
+    setGuardandoGps(true);
+    const respuesta = await fetch("/api/vehiculos", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ placa: vehiculo.placa, gps: valor }),
+    });
+    setGuardandoGps(false);
+    if (!respuesta.ok) {
+      const data = await respuesta.json().catch(() => ({}));
+      setError(data.error || "No se pudo guardar el GPS.");
+      return;
+    }
+    const { vehiculo: actualizado } = await respuesta.json();
+    onActualizar(actualizado);
+  }
+
   return (
-    <article className={estilos.ficha}>
+    <article className={estilos.ficha} id={vehiculo.placa}>
       <header className={estilos.cabecera}>
         <div className={estilos.placa}>
           <span className={estilos.placaEstado}>Yucatán</span>
@@ -92,6 +176,9 @@ export default function VehiculoAdmin({
           <p>
             Póliza {vehiculo.poliza} · vence {fechaCorta(vehiculo.vigencia)}
           </p>
+          {prueba && (
+            <span className={estilos.prueba}>Vehículo de prueba</span>
+          )}
         </div>
 
         <span
@@ -139,6 +226,31 @@ export default function VehiculoAdmin({
           <ValorWhatsApp numero={vehiculo.whatsapp} />
         </div>
         <div className={estilos.dato}>
+          <span className={estilos.etiqueta}>Contacto familiar</span>
+          <ValorWhatsApp numero={vehiculo.familiar} />
+        </div>
+        <div className={estilos.dato}>
+          <span className={estilos.etiqueta}>GPS</span>
+          {vehiculo.gps && vehiculo.gps !== "#" ? (
+            <b>
+              <a
+                className={estilos.enlace}
+                href={vehiculo.gps}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver ubicación
+              </a>
+            </b>
+          ) : (
+            <b className={estilos.pendiente}>Sin enlace</b>
+          )}
+        </div>
+        <div className={estilos.dato}>
+          <span className={estilos.etiqueta}>Semana en circulación</span>
+          <b>{vehiculo.semanaCirculacion ?? "—"}</b>
+        </div>
+        <div className={estilos.dato}>
           <span className={estilos.etiqueta}>Incidencias</span>
           <b>{vehiculo.incidencias}</b>
         </div>
@@ -146,8 +258,10 @@ export default function VehiculoAdmin({
 
       <div className={estilos.pie}>
         <div className={estilos.pagoBloque}>
-          <span className={estilos.etiqueta}>Pago del periodo</span>
-          {admin ? (
+          <span className={estilos.etiqueta}>
+            Pago semana {semana ?? "—"}
+          </span>
+          {puedeEditar ? (
             <button
               className={`${estilos.pago} ${
                 vehiculo.pago === "pagado" ? estilos.ok : estilos.pendienteFila
@@ -168,24 +282,61 @@ export default function VehiculoAdmin({
           )}
         </div>
 
-        {admin && (
-          <div className={estilos.registrar}>
-            <input
-              className={estilos.entrada}
-              type="number"
-              inputMode="numeric"
-              placeholder="Nuevo km total"
-              value={km}
-              onChange={(e) => setKm(e.target.value)}
-            />
-            <button
-              className={estilos.boton}
-              type="button"
-              onClick={registrarKm}
-              disabled={guardando}
-            >
-              {guardando ? "Guardando..." : "Registrar km"}
-            </button>
+        {puedeEditar && (
+          <div className={estilos.controles}>
+            <div className={estilos.registrar}>
+              <input
+                className={estilos.entrada}
+                type="number"
+                inputMode="numeric"
+                placeholder="Nuevo km total"
+                value={km}
+                onChange={(e) => setKm(e.target.value)}
+              />
+              <button
+                className={estilos.boton}
+                type="button"
+                onClick={registrarKm}
+                disabled={guardando}
+              >
+                {guardando ? "Guardando..." : "Registrar km"}
+              </button>
+            </div>
+            <div className={estilos.registrar}>
+              <input
+                className={estilos.entrada}
+                type="number"
+                inputMode="numeric"
+                placeholder="Semana en circulación"
+                value={semanaInput}
+                onChange={(e) => setSemanaInput(e.target.value)}
+              />
+              <button
+                className={estilos.boton}
+                type="button"
+                onClick={guardarSemana}
+                disabled={guardandoSemana}
+              >
+                {guardandoSemana ? "Guardando..." : "Guardar semana"}
+              </button>
+            </div>
+            <div className={estilos.registrar}>
+              <input
+                className={estilos.entrada}
+                type="url"
+                placeholder="Link de GPS (https://...)"
+                value={gpsInput}
+                onChange={(e) => setGpsInput(e.target.value)}
+              />
+              <button
+                className={estilos.boton}
+                type="button"
+                onClick={guardarGps}
+                disabled={guardandoGps}
+              >
+                {guardandoGps ? "Guardando..." : "Guardar GPS"}
+              </button>
+            </div>
           </div>
         )}
       </div>

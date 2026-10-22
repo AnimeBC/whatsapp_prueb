@@ -14,7 +14,9 @@
       "correo": "omar@drivemid.com",
       "contrasena": "123456",
       "rol": "propietario",
-      "vehiculos": ["YXY-669-G"]
+      "vehiculos": [
+        "YXY-669-G"
+      ]
     },
     {
       "id": "prop-zulu",
@@ -22,7 +24,9 @@
       "correo": "zulu@drivemid.com",
       "contrasena": "123456",
       "rol": "propietario",
-      "vehiculos": ["YYY-210-G"]
+      "vehiculos": [
+        "YYY-210-G"
+      ]
     },
     {
       "id": "prop-gran-santa-fe",
@@ -30,7 +34,9 @@
       "correo": "dueno3@drivemid.com",
       "contrasena": "123456",
       "rol": "propietario",
-      "vehiculos": ["ZBC-793-H"]
+      "vehiculos": [
+        "ZBC-793-H"
+      ]
     },
     {
       "id": "prop-paseo",
@@ -38,7 +44,17 @@
       "correo": "dueno4@drivemid.com",
       "contrasena": "123456",
       "rol": "propietario",
-      "vehiculos": ["ZAJ-700-H"]
+      "vehiculos": [
+        "ZAJ-700-H"
+      ]
+    },
+    {
+      "id": "socio-mvirm5ek",
+      "nombre": "uno",
+      "correo": "uno@gmail.com",
+      "contrasena": "123456",
+      "rol": "propietario",
+      "vehiculos": []
     }
   ],
   "vehiculos": [
@@ -53,8 +69,17 @@
       "gps": "#",
       "incidencias": "Ninguna",
       "servicio": 120000,
-      "kmAnterior": 114000,
-      "kmTotal": 114650,
+      "kmAnterior": 114650,
+      "kmTotal": 123333,
+      "semanaCirculacion": 3233,
+      "historialKm": [
+        480,
+        610,
+        590,
+        700,
+        620,
+        650
+      ],
       "pago": "pagado"
     },
     {
@@ -70,6 +95,15 @@
       "servicio": null,
       "kmAnterior": null,
       "kmTotal": null,
+      "semanaCirculacion": 28,
+      "historialKm": [
+        300,
+        420,
+        380,
+        460,
+        410,
+        450
+      ],
       "pago": "pendiente"
     },
     {
@@ -85,6 +119,15 @@
       "servicio": null,
       "kmAnterior": null,
       "kmTotal": null,
+      "semanaCirculacion": 22,
+      "historialKm": [
+        200,
+        260,
+        240,
+        300,
+        280,
+        320
+      ],
       "pago": "pendiente"
     },
     {
@@ -100,6 +143,15 @@
       "servicio": null,
       "kmAnterior": null,
       "kmTotal": null,
+      "semanaCirculacion": 18,
+      "historialKm": [
+        180,
+        220,
+        210,
+        260,
+        240,
+        280
+      ],
       "pago": "pendiente"
     }
   ]

@@ -58,25 +58,61 @@
 
 .usuario {
   display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--tinta2);
+  border: 1px solid var(--lineaOscura);
+  border-radius: 4px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--oro);
+  color: var(--tinta);
+  font-family: var(--titulo);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.usuarioInfo {
+  display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 14px 0;
-  border-top: 1px solid var(--lineaOscura);
-  border-bottom: 1px solid var(--lineaOscura);
+  gap: 2px;
+  min-width: 0;
 }
 
 .usuarioNombre {
-  font-size: 0.92rem;
-  color: #e6e9ed;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f2f0eb;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.usuarioCorreo {
+  font-size: 0.72rem;
+  color: var(--acero);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .usuarioRol {
   align-self: flex-start;
-  font-size: 0.68rem;
+  margin-top: 4px;
+  font-size: 0.66rem;
   color: var(--oro);
   border: 1px solid var(--lineaOro);
   border-radius: 999px;
-  padding: 3px 10px;
+  padding: 2px 8px;
 }
 
 .menu {
@@ -109,13 +145,24 @@
   gap: 12px;
 }
 
-.enlaceLateral {
+.verSitio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--lineaOro);
+  border-radius: 2px;
+  color: var(--oro);
+  font-family: var(--datos);
   font-size: 0.82rem;
-  color: var(--acero);
+  font-weight: 600;
 }
 
-.enlaceLateral:hover {
-  color: var(--oro);
+.verSitio:hover {
+  background: var(--oro);
+  color: var(--tinta);
 }
 
 .salir {
@@ -159,11 +206,22 @@
   }
 
   .usuario {
-    padding: 0;
-    border: 0;
+    padding: 6px 10px;
+    gap: 8px;
+  }
+
+  .usuarioInfo {
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+  }
+
+  .usuarioCorreo {
+    display: none;
+  }
+
+  .usuarioRol {
+    margin-top: 0;
   }
 
   .menu {
@@ -190,6 +248,7 @@
     align-items: center;
   }
 
+  .verSitio,
   .salir {
     width: auto;
   }

@@ -29,7 +29,7 @@ export async function PATCH(request) {
     );
   }
 
-  const { placa, kmTotal, pago } = await request.json();
+  const { placa, kmTotal, pago, semanaCirculacion, gps } = await request.json();
   const datos = await leerDatos();
   const vehiculo = datos.vehiculos.find((v) => v.placa === placa);
 
@@ -55,6 +55,28 @@ export async function PATCH(request) {
 
   if (pago === "pagado" || pago === "pendiente") {
     vehiculo.pago = pago;
+  }
+
+  if (semanaCirculacion != null) {
+    const valorSemana = Number(semanaCirculacion);
+    if (!Number.isInteger(valorSemana) || valorSemana < 0) {
+      return NextResponse.json(
+        { error: "La semana en circulación debe ser un entero positivo." },
+        { status: 400 }
+      );
+    }
+    vehiculo.semanaCirculacion = valorSemana;
+  }
+
+  if (gps != null) {
+    const valorGps = String(gps).trim();
+    if (valorGps && !/^https?:\/\//i.test(valorGps)) {
+      return NextResponse.json(
+        { error: "El link del GPS debe iniciar con http:// o https://." },
+        { status: 400 }
+      );
+    }
+    vehiculo.gps = valorGps || "#";
   }
 
   await guardarDatos(datos);
