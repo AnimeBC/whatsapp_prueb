@@ -1,7 +1,7 @@
 import Inicio from "@/_Pages/principal/Inicio/Inicio";
 
 export const metadata = {
-  title: "Inicio",
+  title: "Drive Mid | Movility Fleet",
   description:
     "Invierte seguro, invierte en Mérida. Movility Fleet: socios para un modelo estable, con alto rendimiento y mínimo riesgo.",
 };

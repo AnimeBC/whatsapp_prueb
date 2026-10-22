@@ -13,10 +13,33 @@ const datos = Space_Grotesk({
   display: "swap",
 });
 
+const descripcion =
+  "Drive Mid · Movility Fleet en Mérida, Yucatán. Un modelo de inversión en movilidad estable, con alto rendimiento y mínimo riesgo, monitoreable 24/7.";
+
 export const metadata = {
+  metadataBase: new URL("https://whatsappprueb.vercel.app"),
   title: "Drive Mid | Movility Fleet",
-  description:
-    "Drive Mid · Movility Fleet en Mérida, Yucatán. Un modelo de inversión en movilidad estable, con alto rendimiento y mínimo riesgo, monitoreable 24/7.",
+  description: descripcion,
+  applicationName: "Drive Mid",
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
+  openGraph: {
+    title: "Drive Mid | Movility Fleet",
+    description: descripcion,
+    url: "/",
+    siteName: "Drive Mid",
+    locale: "es_MX",
+    type: "website",
+    images: [{ url: "/logo_autos.jpg", alt: "Drive Mid" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Drive Mid | Movility Fleet",
+    description: descripcion,
+    images: ["/logo_autos.jpg"],
+  },
 };
 
 export default function RootLayout({ children }) {
