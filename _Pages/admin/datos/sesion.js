@@ -11,6 +11,10 @@ export async function getSesion() {
   const datos = await verificarToken(token);
   if (!datos?.id) return null;
 
-  const usuario = await usuarioPorId(datos.id);
-  return usuario ? sinContrasena(usuario) : null;
+  try {
+    const usuario = await usuarioPorId(datos.id);
+    return usuario ? sinContrasena(usuario) : null;
+  } catch {
+    return null;
+  }
 }

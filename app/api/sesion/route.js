@@ -5,7 +5,7 @@ export async function GET() {
   const usuario = await getSesion();
 
   if (!usuario) {
-    return NextResponse.json({ usuario: null }, { status: 401 });
+    return NextResponse.json({ usuario: null });
   }
 
   return NextResponse.json({ usuario });
