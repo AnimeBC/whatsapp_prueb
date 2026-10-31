@@ -16,7 +16,16 @@ export async function iniciarSesionSocio(estadoPrevio, formData) {
     return { error: "Ingresa tu correo y contraseña." };
   }
 
-  const usuario = await prisma.usuario.findUnique({ where: { correo } });
+  let usuario;
+  try {
+    usuario = await prisma.usuario.findUnique({ where: { correo } });
+  } catch (error) {
+    console.error("Error al consultar el usuario:", error);
+    return {
+      error:
+        "No pudimos conectar con la base de datos. Intenta de nuevo en unos segundos.",
+    };
+  }
 
   if (!usuario) {
     return { error: "Correo o contraseña incorrectos." };

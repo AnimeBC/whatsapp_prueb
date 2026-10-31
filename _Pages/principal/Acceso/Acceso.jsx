@@ -26,7 +26,7 @@ export default function Acceso() {
           <Link className={estilos.marca} href="/">
             <span className={estilos.emblema}>
               <Image
-                src="/logo_emblema.png"
+                src="/logo_emblema.png?v=3"
                 alt=""
                 width={640}
                 height={640}

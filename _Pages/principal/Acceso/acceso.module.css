@@ -39,10 +39,11 @@
   flex: 0 0 auto;
   width: 64px;
   height: 64px;
+  padding: 2px;
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid var(--lineaOro);
-  background: #0e131a;
+  background: #f2f0eb;
 }
 
 .emblema img {
