@@ -129,10 +129,6 @@ export default function Acceso() {
                 >
                   {pendienteLogin ? "Entrando..." : "Entrar"}
                 </button>
-
-                <p className={estilos.pista}>
-                  Acceso de prueba: demo@drivemid.com / 123456
-                </p>
               </form>
             ) : (
               <form className={estilos.formCampos} action={accionRegistro}>
