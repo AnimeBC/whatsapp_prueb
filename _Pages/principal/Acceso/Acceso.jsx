@@ -26,7 +26,7 @@ export default function Acceso() {
           <Link className={estilos.marca} href="/">
             <span className={estilos.emblema}>
               <Image
-                src="/logo_emblema.png?v=3"
+                src="/logo_emblema.png?v=4"
                 alt=""
                 width={640}
                 height={640}
@@ -36,6 +36,16 @@ export default function Acceso() {
             </span>
             <span className={estilos.marcaNombre}>Drive Mid</span>
           </Link>
+
+          <div className={estilos.logoCentro} aria-hidden="true">
+            <Image
+              src="/logo_emblema.png?v=4"
+              alt=""
+              width={640}
+              height={640}
+              unoptimized
+            />
+          </div>
 
           <div className={estilos.mensaje}>
             <p className={estilos.kicker}>Acceso</p>
