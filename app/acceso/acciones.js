@@ -28,10 +28,6 @@ export async function iniciarSesionSocio(estadoPrevio, formData) {
     return { error: "Correo o contraseña incorrectos." };
   }
 
-  if (usuario.rol !== "propietario") {
-    return { error: "Este acceso es solo para socios." };
-  }
-
   const almacen = await cookies();
   almacen.set("sesion", await crearToken(usuario), OPCIONES_COOKIE);
 

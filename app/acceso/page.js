@@ -4,7 +4,7 @@ import { getSesion } from "@/_Pages/admin/datos/sesion";
 import Acceso from "@/_Pages/principal/Acceso/Acceso";
 
 export const metadata = {
-  title: "Acceso de socios | Drive Mid",
+  title: "Acceso | Drive Mid",
   robots: { index: false, follow: false },
 };
 

@@ -37,13 +37,13 @@ export default function Acceso() {
           </Link>
 
           <div className={estilos.mensaje}>
-            <p className={estilos.kicker}>Acceso de socios</p>
+            <p className={estilos.kicker}>Acceso</p>
             <h1 className={estilos.titulo}>
-              Consulta tu vehículo y tu inversión.
+              Entra a tu panel de Drive Mid.
             </h1>
             <p className={estilos.texto}>
-              Ingresa con tu cuenta o crea una nueva para dar seguimiento a tu
-              inversión.
+              Ingresa con tu cuenta para consultar tu vehículo, tu inversión o
+              la flota completa.
             </p>
           </div>
         </aside>
@@ -57,7 +57,7 @@ export default function Acceso() {
             <div
               className={estilos.pestanas}
               role="tablist"
-              aria-label="Acceso de socios"
+              aria-label="Acceso"
             >
               <button
                 type="button"
@@ -120,7 +120,7 @@ export default function Acceso() {
                 </button>
 
                 <p className={estilos.pista}>
-                  Acceso de prueba: omar@drivemid.com / 123456
+                  Acceso de prueba: demo@drivemid.com / 123456
                 </p>
               </form>
             ) : (

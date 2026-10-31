@@ -9,6 +9,14 @@
       "vehiculos": []
     },
     {
+      "id": "demo-flota",
+      "nombre": "Demo Flota",
+      "correo": "demo@drivemid.com",
+      "contrasena": "123456",
+      "rol": "admin",
+      "vehiculos": []
+    },
+    {
       "id": "prop-omar",
       "nombre": "Omar Rosado",
       "correo": "omar@drivemid.com",
