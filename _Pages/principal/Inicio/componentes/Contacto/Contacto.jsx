@@ -3,8 +3,8 @@
 import { useState } from "react";
 import estilos from "./contacto.module.css";
 
-const TELEFONO = "+52 999 111 8219";
-const WHATSAPP = "529991118219";
+const TELEFONO = "+52 998 936 2734";
+const WHATSAPP = "529989362734";
 const DIRECCION = "Plaza San Juan Bautista, Gran Santa Fe, Mérida, Yucatán";
 const MAPA = `https://www.google.com/maps?q=${encodeURIComponent(
   DIRECCION
