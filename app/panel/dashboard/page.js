@@ -28,16 +28,11 @@ async function Contenido() {
   }
 
   const lista = (await todosLosVehiculos()).map(serializarVehiculo);
-  const { vehiculos, modoPrueba } = vehiculosParaPanel(usuario, lista);
+  const { vehiculos } = vehiculosParaPanel(lista);
 
   return (
     <PanelShell usuario={usuario}>
-      <Dashboard
-        usuario={usuario}
-        vehiculos={vehiculos}
-        hoy={ahoraMs()}
-        modoPrueba={modoPrueba}
-      />
+      <Dashboard usuario={usuario} vehiculos={vehiculos} hoy={ahoraMs()} />
     </PanelShell>
   );
 }

@@ -6,20 +6,15 @@ import Image from "next/image";
 import { cerrarSesion } from "@/app/admin/acciones";
 import estilos from "./panelShell.module.css";
 
-const ENLACES_ADMIN = [
+const ENLACES = [
   { href: "/panel/dashboard", texto: "Dashboard" },
   { href: "/panel/flota", texto: "Autos" },
-];
-
-const ENLACES_PROPIETARIO = [
-  { href: "/panel/dashboard", texto: "Dashboard" },
-  { href: "/panel/flota", texto: "Mi vehículo" },
 ];
 
 export default function PanelShell({ usuario, children }) {
   const pathname = usePathname();
   const esAdmin = usuario.rol === "admin";
-  const enlaces = esAdmin ? ENLACES_ADMIN : ENLACES_PROPIETARIO;
+  const enlaces = ENLACES;
   const inicial = usuario.nombre.trim().charAt(0).toUpperCase();
 
   return (

@@ -41,8 +41,6 @@ function ListaVehiculos({
   esAdmin,
   hoy,
   semana,
-  prueba = false,
-  mensajeVacio = "No hay vehículos en esta sección.",
   onActualizar,
 }) {
   const [busqueda, setBusqueda] = useState("");
@@ -76,7 +74,7 @@ function ListaVehiculos({
       {items.length === 0 ? (
         <p className={estilos.vacio}>
           {vehiculos.length === 0
-            ? mensajeVacio
+            ? "No hay vehículos en esta sección."
             : "No se encontraron vehículos con esa búsqueda."}
         </p>
       ) : (
@@ -88,7 +86,6 @@ function ListaVehiculos({
               admin={esAdmin}
               hoy={hoy}
               semana={semana}
-              prueba={prueba}
               onActualizar={onActualizar}
             />
           ))}
@@ -122,9 +119,8 @@ function ListaVehiculos({
   );
 }
 
-export default function Flota({ usuario, propios, otros, hoy }) {
+export default function Flota({ usuario, propios, hoy }) {
   const [mios, setMios] = useState(propios);
-  const [demostracion, setDemostracion] = useState(otros);
   const esAdmin = usuario.rol === "admin";
 
   const indice =
@@ -142,20 +138,12 @@ export default function Flota({ usuario, propios, otros, hoy }) {
     );
   }
 
-  function actualizarDemo(actualizado) {
-    setDemostracion((prev) =>
-      prev.map((v) => (v.placa === actualizado.placa ? actualizado : v))
-    );
-  }
-
   return (
     <>
       <div className={estilos.cabecera}>
         <div>
           <p className="kicker">Monitoreo</p>
-          <h1 className={estilos.titulo}>
-            {esAdmin ? "Autos" : "Mi vehículo"}
-          </h1>
+          <h1 className={estilos.titulo}>Autos</h1>
           <p className={estilos.lead}>
             Seguimiento 24/7 en tiempo real, para mayor confianza y certeza de
             que tu capital está 100% seguro y generando rendimientos.
@@ -168,50 +156,15 @@ export default function Flota({ usuario, propios, otros, hoy }) {
         </div>
       </div>
 
-      {esAdmin ? (
-        <ListaVehiculos
-          titulo="Autos"
-          descripcion="Vehículos en operación."
-          vehiculos={mios}
-          esAdmin
-          hoy={hoy}
-          semana={semana}
-          onActualizar={actualizarVehiculo}
-        />
-      ) : (
-        <>
-          <ListaVehiculos
-            titulo="Mis vehículos"
-            descripcion="Vehículos vinculados a tu cuenta."
-            vehiculos={mios}
-            esAdmin={false}
-            hoy={hoy}
-            semana={semana}
-            mensajeVacio="Aún no tienes vehículos asignados. El equipo de Drive Mid vinculará tu unidad."
-            onActualizar={actualizarVehiculo}
-          />
-
-          <div className={estilos.separador}>
-            <span>Otros vehículos</span>
-          </div>
-
-          <div className={estilos.avisoPrueba}>
-            <strong>Aviso:</strong> estos vehículos son de prueba y no están
-            asignados a tu cuenta. Los cambios que hagas aquí son solo de
-            demostración y no se guardan.
-          </div>
-
-          <ListaVehiculos
-            descripcion="No están vinculados a tu cuenta; puedes probar el registro de km, la semana y el pago en modo de prueba."
-            vehiculos={demostracion}
-            esAdmin={false}
-            hoy={hoy}
-            semana={semana}
-            prueba
-            onActualizar={actualizarDemo}
-          />
-        </>
-      )}
+      <ListaVehiculos
+        titulo="Autos"
+        descripcion="Vehículos en operación."
+        vehiculos={mios}
+        esAdmin={esAdmin}
+        hoy={hoy}
+        semana={semana}
+        onActualizar={actualizarVehiculo}
+      />
     </>
   );
 }

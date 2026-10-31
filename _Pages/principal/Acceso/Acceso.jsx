@@ -23,17 +23,14 @@ export default function Acceso() {
     <div className={estilos.pantalla}>
       <div className={estilos.marco}>
         <aside className={estilos.lateral}>
-          <Link className={estilos.marca} href="/">
-            <span className={estilos.emblema}>
-              <Image
-                src="/logo_emblema.png"
-                alt=""
-                width={640}
-                height={640}
-                priority
-              />
-            </span>
-            <span className={estilos.marcaNombre}>Drive Mid</span>
+          <Link className={estilos.marcaGrande} href="/">
+            <Image
+              src="/logo_emblema.png"
+              alt="Drive Mid"
+              width={640}
+              height={640}
+              priority
+            />
           </Link>
 
           <div className={estilos.mensaje}>

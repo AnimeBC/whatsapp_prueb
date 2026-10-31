@@ -28,16 +28,11 @@ async function Contenido() {
   }
 
   const lista = (await todosLosVehiculos()).map(serializarVehiculo);
-  const { propios, otros } = flotaParaPanel(usuario, lista);
+  const { propios } = flotaParaPanel(lista);
 
   return (
     <PanelShell usuario={usuario}>
-      <Flota
-        usuario={usuario}
-        propios={propios}
-        otros={otros}
-        hoy={ahoraMs()}
-      />
+      <Flota usuario={usuario} propios={propios} hoy={ahoraMs()} />
     </PanelShell>
   );
 }
